@@ -26,3 +26,14 @@ Ponto: lat -25.4980, lon -48.5030 → GeoJSON `[-48.5030, -25.4980]`. Vou usar `
 - **Depois do índice:** stages `LIMIT > FETCH > GEO_NEAR_2DSPHERE` (com IXSCAN no índice 2dsphere por baixo). O `$near` vai buscando em anéis que crescem a partir do ponto e para quando já tem 10 garantidos, então **não lê os ~3.700**. Estimo **totalKeysExamined na casa das centenas** e **totalDocsExamined de dezenas a poucas centenas**.
 - **SORT em memória:** não aparece estágio SORT. A ordenação por distância é feita pelo próprio estágio GEO_NEAR.
 - **nReturned:** 10.
+
+## A3 — TTL em `alertas.registrado_em` que não apaga nada
+
+Observação antes de rodar: no `getIndexes()` do setup a coleção `alertas` só tinha o `_id_`, porque o gerador não cria TTL nenhum. Vou criar o TTL do enunciado pra reproduzir o cenário.
+
+**Hipótese inicial:** o problema não está no índice, está no **tipo do dado**. O gerador grava `registrado_em` com `.toISOString()`, ou seja, uma **string** do tipo `"2026-03-14T..."`, e não um BSON Date. O monitor TTL (uma thread que roda mais ou menos a cada 60 s) só compara datas: se o campo indexado não for Date (ou array de Dates), o documento é ignorado e fica pra sempre, sem dar erro nenhum.
+
+O que espero ver:
+- `aggregate` com `$type` em `registrado_em` → **100% "string"**, 0 "date".
+- Mesmo com o TTL criado e esperando mais de 60 s, o `countDocuments()` continua em **100.000**. As datas vão de jan a out/2026 e hoje é 23/11/2026, então se fossem Date, quase tudo já teria passado dos 30 dias.
+- Um documento de teste com `new Date()` antigo deve sumir no próximo ciclo do TTL. Um com string não.
