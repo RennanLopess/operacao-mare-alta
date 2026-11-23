@@ -61,3 +61,18 @@ Raciocínio: Refrigerado é 1/4 de 400 mil ≈ 100 mil, e 70% depois do corte (d
 - **Com o índice:** `IXSCAN → FETCH` (o FETCH é necessário porque `terminal` e `peso_kg` não estão no índice) → `$group`. Estimo **totalKeysExamined ≈ totalDocsExamined ≈ 70 mil**, e são esses **~70 mil docs que entram no `$group`**.
 - **SORT em memória:** só o `$sort` depois do `$group`, que ordena 5 linhas (uma por terminal), então não pesa nada.
 - **Saída (nReturned final):** 3 linhas. Cada terminal tem ~14 mil movimentações, peso médio perto de 16 mil kg (média de 1.000 + 0 a 29.999), peso total na casa de ~220–230 milhões de kg e maior peso perto de 31 mil kg. Os três primeiros devem ficar bem próximos, porque os dados são uniformes.
+
+## B2 — pipeline com defeito (todo o período, Refrigerado, top 3 por peso)
+
+**a) Rodando como está, eu espero:**
+- `$project {terminal, classe}` mantém também o `_id` e **joga fora o `peso_kg`**.
+- `$group` por (terminal, classe) → **20 grupos** (5 × 4), cada um com `mov` ≈ 20 mil.
+- `kg_total: {$sum: "peso_kg"}` sem `$` soma a **string literal** "peso_kg", que não é número. O `$sum` ignora valor não numérico, então **kg_total = 0 em todos**. (Mesmo com `$`, daria 0, porque o `$project` já tirou o campo.)
+- `$limit 3` antes do `$sort` pega **3 grupos quaisquer** (a ordem de saída do `$group` não é garantida), e o `$sort` depois ordena só esses 3, todos empatados em 0.
+- `$match` no fim filtra Refrigerado só entre esses 3 grupos aleatórios. Cada grupo tem 1/4 de chance de ser Refrigerado, então espero **0 ou 1 documento** na saída, e com `kg_total: 0`.
+- **Plano:** COLLSCAN, 400 mil docs examinados, 0 chaves. Nenhum índice ajuda, porque o filtro só aparece no fim, depois de `$group` e `$limit`, e o otimizador não pode passar um `$match` por cima de um `$limit`.
+
+**c) Pipeline corrigido:** `$match {classe}` → `$group` por terminal com `$sum: "$peso_kg"` → `$sort` → `$limit 3` → `$project`.
+- Plano: **IXSCAN no `idx_classe_ts`** (prefixo `classe`, `ts` sem limite) → FETCH → group. ~100 mil chaves e ~100 mil docs (1/4 de 400 mil), **~100 mil entram no `$group`**, 5 grupos, 3 na saída.
+- Cada terminal com ~20 mil mov. e ~320 milhões de kg (20 mil × ~16 mil kg).
+- SORT só de 5 linhas.
