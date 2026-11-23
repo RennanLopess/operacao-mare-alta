@@ -37,3 +37,17 @@ O que espero ver:
 - `aggregate` com `$type` em `registrado_em` → **100% "string"**, 0 "date".
 - Mesmo com o TTL criado e esperando mais de 60 s, o `countDocuments()` continua em **100.000**. As datas vão de jan a out/2026 e hoje é 23/11/2026, então se fossem Date, quase tudo já teria passado dos 30 dias.
 - Um documento de teste com `new Date()` antigo deve sumir no próximo ciclo do TTL. Um com string não.
+
+## A4 — covered query: `find({tipo:"inspecao", terminal:"T2"}, {_id:0, container:1})`
+
+Raciocínio: 5 tipos × 5 terminais uniformes, então ~400.000 / 25 ≈ **16 mil docs**. Índice que vou criar: `{ tipo: 1, terminal: 1, container: 1 }`. O filtro (tipo, terminal) e a projeção (container) ficam todos dentro da chave.
+
+| | com `_id:0` | sem `_id:0` |
+|---|---|---|
+| stage | `PROJECTION_COVERED > IXSCAN` | `PROJECTION_SIMPLE > FETCH > IXSCAN` |
+| totalKeysExamined | ~16 mil | ~16 mil |
+| totalDocsExamined | **0** | **~16 mil** (um por resultado) |
+| SORT em memória | não | não |
+| nReturned | ~16 mil | ~16 mil |
+
+Por quê: o `_id` sai na projeção por padrão e não está no índice. Se eu não excluir, o Mongo precisa ir em cada documento (FETCH) só pra pegar o `_id`, e a consulta deixa de ser coberta. O índice ESR da A1 começa por `terminal` mas não tem `tipo` nem `container`, então acho que o planner nem vai escolher ele.
