@@ -1,4 +1,3 @@
-// A4 — rodar com: docker exec mongo-lab mongosh logiporto --quiet --file /tmp/a4.js
 const fs = require("fs");
 const OUT = "/tmp/out/";
 fs.mkdirSync(OUT, { recursive: true });
@@ -22,12 +21,12 @@ function mostra(nome, ex) {
 const filtro = { tipo: "inspecao", terminal: "T2" };
 db.movimentacoes.createIndex({ tipo: 1, terminal: 1, container: 1 }, { name: "idx_tipo_terminal_container" });
 
-print("=== 1) com _id:0 (coberta) ===");
+print("=== 1) projecao {_id:0, container:1} ===");
 const r1 = mostra("1_coberta", db.movimentacoes.find(filtro, { _id: 0, container: 1 }).explain("executionStats"));
-print("amostra: " + JSON.stringify(db.movimentacoes.find(filtro, { _id: 0, container: 1 }).limit(3).toArray()));
+print("limit 3: " + JSON.stringify(db.movimentacoes.find(filtro, { _id: 0, container: 1 }).limit(3).toArray()));
 
-print("\n=== 2) sem _id:0 ===");
+print("\n=== 2) projecao {container:1} ===");
 const r2 = mostra("2_sem_id0", db.movimentacoes.find(filtro, { container: 1 }).explain("executionStats"));
-print("amostra: " + JSON.stringify(db.movimentacoes.find(filtro, { container: 1 }).limit(3).toArray()));
+print("limit 3: " + JSON.stringify(db.movimentacoes.find(filtro, { container: 1 }).limit(3).toArray()));
 
 fs.writeFileSync(OUT + "a4_metricas.json", JSON.stringify([r1, r2], null, 2));

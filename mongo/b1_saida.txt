@@ -1,5 +1,5 @@
-﻿=== 1) antes do índice ===
-arvore de execucao:
+﻿=== 1) sem idx_classe_ts ===
+executionStages:
 project nReturned=5
   project nReturned=5
     group nReturned=5
@@ -14,17 +14,17 @@ project nReturned=5
   totalKeysExamined: 0,
   totalDocsExamined: 400000,
   docsQueEntraramNoGroup: 69843,
-  executionTimeMillis: 145,
+  executionTimeMillis: 127,
   tempos3execucoes: [
-    136,
     131,
-    132
+    122,
+    140
   ]
 }
 
-=== 2) índice para o $match inicial ===
+=== 2) com idx_classe_ts ===
 idx_classe_ts
-arvore de execucao:
+executionStages:
 project nReturned=5
   project nReturned=5
     group nReturned=5
@@ -39,16 +39,16 @@ project nReturned=5
   totalKeysExamined: 69843,
   totalDocsExamined: 69843,
   docsQueEntraramNoGroup: 69843,
-  executionTimeMillis: 176,
+  executionTimeMillis: 105,
   tempos3execucoes: [
-    159,
-    106,
-    97
+    104,
+    100,
+    102
   ]
 }
 
-=== 3) resultado ===
+=== 3) aggregate ===
 {"total_mov":14040,"peso_total":226034926,"peso_medio":16099.353703703704,"maior_peso":30995,"terminal":"T1"}
 {"total_mov":13953,"peso_total":223948443,"peso_medio":16050.20017200602,"maior_peso":30997,"terminal":"T2"}
 {"total_mov":13893,"peso_total":222832966,"peso_medio":16039.225941121427,"maior_peso":30996,"terminal":"T3"}
-conferência - docs no $match: 69843
+countDocuments $match: 69843

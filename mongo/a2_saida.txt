@@ -1,26 +1,26 @@
-﻿=== 1) ANTES do índice 2dsphere ===
-índices: [{"_id":1},{"terminal":1,"classe":1,"peso_kg":-1,"ts":1}]
+﻿=== 1) antes do indice 2dsphere ===
+indices: [{"_id":1},{"terminal":1,"classe":1,"peso_kg":-1,"ts":1}]
 ERRO code 291 (NoQueryExecutionPlans): unable to find index for $geoNear query
-$geoWithin sem índice: stages=COLLSCAN docsExamined=400000 nReturned=3729 ms=846
+$geoWithin $centerSphere: stages=COLLSCAN docsExamined=400000 nReturned=3729 ms=384
 
-=== 2) criando o índice ===
+=== 2) createIndex ===
 idx_posicao_2dsphere
 
-=== 3) DEPOIS: $near + limit 10 com explain ===
+=== 3) $near limit 10 explain executionStats ===
 stages: LIMIT > GEO_NEAR_2DSPHERE > FETCH > IXSCAN
 {
   totalDocsExamined: 14,
   totalKeysExamined: 37,
   nReturned: 10,
-  executionTimeMillis: 9
+  executionTimeMillis: 3
 }
 LIMIT | works=53 advanced=10
   GEO_NEAR_2DSPHERE searchIntervals=1 | works=52 advanced=10
     FETCH | works=38 advanced=14 docsExamined=14
       IXSCAN idx=idx_posicao_2dsphere | works=38 advanced=14 keysExamined=37
-  anel 1: 0.0 m a 13.3 m, 14 docs bufferizados, 10 devolvidos
+  intervalo 1: 0.0 m a 13.3 m, nBuffered=14, nReturned=10
 
-=== 4) resultado (distância calculada com $geoNear, só pra conferência) ===
+=== 4) $geoNear distanceField ===
 {"container":"CTN13111","tipo":"carga","terminal":"T2","coords":[-48.50296744406689,-25.498005695431495],"dist_m":3.3}
 {"container":"CTN29305","tipo":"descarga","terminal":"T4","coords":[-48.50301766768564,-25.498030085267963],"dist_m":3.8}
 {"container":"CTN02566","tipo":"gate_out","terminal":"T1","coords":[-48.50296817496885,-25.497960983600933],"dist_m":5.4}
@@ -31,6 +31,6 @@ LIMIT | works=53 advanced=10
 {"container":"CTN29227","tipo":"gate_in","terminal":"T1","coords":[-48.503074459992355,-25.498073449626098],"dist_m":11.1}
 {"container":"CTN16484","tipo":"gate_in","terminal":"T2","coords":[-48.50295001682127,-25.497907109674998],"dist_m":11.5}
 {"container":"CTN40312","tipo":"gate_out","terminal":"T4","coords":[-48.50296806132421,-25.497892812930512],"dist_m":12.4}
-total de docs dentro de 300 m: 3729
+countDocuments raio 300 m: 3729
 
-índices: [{"_id":1},{"terminal":1,"classe":1,"peso_kg":-1,"ts":1},{"posicao":"2dsphere"}]
+indices: [{"_id":1},{"terminal":1,"classe":1,"peso_kg":-1,"ts":1},{"posicao":"2dsphere"}]

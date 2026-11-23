@@ -7,7 +7,7 @@
       "estagiosForaDoCursor": "$limit(nReturned=3) > $match(nReturned=1) > $sort(nReturned=1)",
       "totalKeysExamined": 0,
       "totalDocsExamined": 400000,
-      "executionTimeMillis": 113
+      "executionTimeMillis": 111
     },
     {
       "cenario": "c_corrigido",
@@ -16,7 +16,7 @@
       "estagiosForaDoCursor": "$sort(nReturned=3) > $project(nReturned=3)",
       "totalKeysExamined": 100016,
       "totalDocsExamined": 100016,
-      "executionTimeMillis": 136
+      "executionTimeMillis": 129
     }
   ],
   "corrigido": [

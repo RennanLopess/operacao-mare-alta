@@ -20,7 +20,7 @@
     "queryHash": "6655187A",
     "planCacheShapeHash": "6655187A",
     "planCacheKey": "AC6AE1DA",
-    "optimizationTimeMillis": 9,
+    "optimizationTimeMillis": 3,
     "maxIndexedOrSolutionsReached": false,
     "maxIndexedAndSolutionsReached": false,
     "maxScansToExplodeReached": false,
@@ -125,7 +125,7 @@
   "executionStats": {
     "executionSuccess": true,
     "nReturned": 15992,
-    "executionTimeMillis": 20,
+    "executionTimeMillis": 13,
     "totalKeysExamined": 15992,
     "totalDocsExamined": 0,
     "executionStages": {

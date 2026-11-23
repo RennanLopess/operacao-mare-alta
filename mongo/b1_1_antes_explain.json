@@ -69,18 +69,18 @@
         "executionStats": {
           "executionSuccess": true,
           "nReturned": 5,
-          "executionTimeMillis": 145,
+          "executionTimeMillis": 127,
           "totalKeysExamined": 0,
           "totalDocsExamined": 400000,
           "executionStages": {
             "stage": "project",
             "planNodeId": 3,
             "nReturned": 5,
-            "executionTimeMillisEstimate": 142,
+            "executionTimeMillisEstimate": 122,
             "opens": 1,
             "closes": 1,
-            "saveState": 9,
-            "restoreState": 8,
+            "saveState": 8,
+            "restoreState": 7,
             "isEOF": 1,
             "projections": {
               "18": "newObj(\"_id\", s15, \"total_mov\", s7, \"peso_total\", s16, \"peso_medio\", s11, \"maior_peso\", s17) "
@@ -89,11 +89,11 @@
               "stage": "project",
               "planNodeId": 3,
               "nReturned": 5,
-              "executionTimeMillisEstimate": 142,
+              "executionTimeMillisEstimate": 122,
               "opens": 1,
               "closes": 1,
-              "saveState": 9,
-              "restoreState": 8,
+              "saveState": 8,
+              "restoreState": 7,
               "isEOF": 1,
               "projections": {
                 "16": "doubleDoubleSumFinalize(s10) ",
@@ -103,11 +103,11 @@
                 "stage": "group",
                 "planNodeId": 3,
                 "nReturned": 5,
-                "executionTimeMillisEstimate": 142,
+                "executionTimeMillisEstimate": 122,
                 "opens": 1,
                 "closes": 1,
-                "saveState": 9,
-                "restoreState": 8,
+                "saveState": 8,
+                "restoreState": 7,
                 "isEOF": 1,
                 "groupBySlots": [
                   15
@@ -140,11 +140,11 @@
                   "stage": "project",
                   "planNodeId": 3,
                   "nReturned": 69843,
-                  "executionTimeMillisEstimate": 132,
+                  "executionTimeMillisEstimate": 112,
                   "opens": 1,
                   "closes": 1,
-                  "saveState": 9,
-                  "restoreState": 8,
+                  "saveState": 8,
+                  "restoreState": 7,
                   "isEOF": 1,
                   "projections": {
                     "15": "(s4 ?: null) "
@@ -153,11 +153,11 @@
                     "stage": "filter",
                     "planNodeId": 1,
                     "nReturned": 69843,
-                    "executionTimeMillisEstimate": 132,
+                    "executionTimeMillisEstimate": 112,
                     "opens": 1,
                     "closes": 1,
-                    "saveState": 9,
-                    "restoreState": 8,
+                    "saveState": 8,
+                    "restoreState": 7,
                     "isEOF": 1,
                     "numTested": 400000,
                     "filter": "(traverseF(s5, lambda(l3.0) { ((move(l3.0) == \"Refrigerado\") ?: false) }, false) && traverseF(s6, lambda(l4.0) { ((move(l4.0) >= Date(1775001600000)) ?: false) }, false)) ",
@@ -165,11 +165,11 @@
                       "stage": "scan",
                       "planNodeId": 1,
                       "nReturned": 400000,
-                      "executionTimeMillisEstimate": 44,
+                      "executionTimeMillisEstimate": 72,
                       "opens": 1,
                       "closes": 1,
-                      "saveState": 9,
-                      "restoreState": 8,
+                      "saveState": 8,
+                      "restoreState": 7,
                       "isEOF": 1,
                       "numReads": 400000,
                       "recordSlot": 1,
@@ -195,7 +195,7 @@
         }
       },
       "nReturned": 5,
-      "executionTimeMillisEstimate": 142
+      "executionTimeMillisEstimate": 124
     },
     {
       "$sort": {
@@ -211,7 +211,7 @@
       "spilledRecords": 0,
       "spilledDataStorageSize": 0,
       "nReturned": 3,
-      "executionTimeMillisEstimate": 142,
+      "executionTimeMillisEstimate": 124,
       "peakTrackedMemBytes": 1119
     },
     {
@@ -224,7 +224,7 @@
         "_id": false
       },
       "nReturned": 3,
-      "executionTimeMillisEstimate": 142
+      "executionTimeMillisEstimate": 124
     }
   ],
   "queryShapeHash": "D9275444C8C7A2E6A67FD2D4D5F143F0A1BC50D33333A09FF51C883002721D07",

@@ -39,14 +39,14 @@
         "executionStats": {
           "executionSuccess": true,
           "nReturned": 20,
-          "executionTimeMillis": 113,
+          "executionTimeMillis": 111,
           "totalKeysExamined": 0,
           "totalDocsExamined": 400000,
           "executionStages": {
             "stage": "project",
             "planNodeId": 3,
             "nReturned": 20,
-            "executionTimeMillisEstimate": 108,
+            "executionTimeMillisEstimate": 110,
             "opens": 1,
             "closes": 1,
             "saveState": 8,
@@ -59,7 +59,7 @@
               "stage": "project",
               "planNodeId": 3,
               "nReturned": 20,
-              "executionTimeMillisEstimate": 108,
+              "executionTimeMillisEstimate": 110,
               "opens": 1,
               "closes": 1,
               "saveState": 8,
@@ -73,7 +73,7 @@
                 "stage": "group",
                 "planNodeId": 3,
                 "nReturned": 20,
-                "executionTimeMillisEstimate": 108,
+                "executionTimeMillisEstimate": 110,
                 "opens": 1,
                 "closes": 1,
                 "saveState": 8,
@@ -105,7 +105,7 @@
                   "stage": "scan",
                   "planNodeId": 1,
                   "nReturned": 400000,
-                  "executionTimeMillisEstimate": 38,
+                  "executionTimeMillisEstimate": 36,
                   "opens": 1,
                   "closes": 1,
                   "saveState": 8,
@@ -129,12 +129,12 @@
         }
       },
       "nReturned": 3,
-      "executionTimeMillisEstimate": 108
+      "executionTimeMillisEstimate": 111
     },
     {
       "$limit": 3,
       "nReturned": 3,
-      "executionTimeMillisEstimate": 108
+      "executionTimeMillisEstimate": 111
     },
     {
       "$match": {
@@ -143,7 +143,7 @@
         }
       },
       "nReturned": 1,
-      "executionTimeMillisEstimate": 108
+      "executionTimeMillisEstimate": 111
     },
     {
       "$sort": {
@@ -158,7 +158,7 @@
       "spilledRecords": 0,
       "spilledDataStorageSize": 0,
       "nReturned": 1,
-      "executionTimeMillisEstimate": 108,
+      "executionTimeMillisEstimate": 111,
       "peakTrackedMemBytes": 610
     }
   ],

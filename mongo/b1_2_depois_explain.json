@@ -80,18 +80,18 @@
         "executionStats": {
           "executionSuccess": true,
           "nReturned": 5,
-          "executionTimeMillis": 176,
+          "executionTimeMillis": 105,
           "totalKeysExamined": 69843,
           "totalDocsExamined": 69843,
           "executionStages": {
             "stage": "project",
             "planNodeId": 4,
             "nReturned": 5,
-            "executionTimeMillisEstimate": 173,
+            "executionTimeMillisEstimate": 104,
             "opens": 1,
             "closes": 1,
-            "saveState": 11,
-            "restoreState": 10,
+            "saveState": 7,
+            "restoreState": 6,
             "isEOF": 1,
             "projections": {
               "21": "newObj(\"_id\", s18, \"total_mov\", s10, \"peso_total\", s19, \"peso_medio\", s14, \"maior_peso\", s20) "
@@ -100,11 +100,11 @@
               "stage": "project",
               "planNodeId": 4,
               "nReturned": 5,
-              "executionTimeMillisEstimate": 173,
+              "executionTimeMillisEstimate": 104,
               "opens": 1,
               "closes": 1,
-              "saveState": 11,
-              "restoreState": 10,
+              "saveState": 7,
+              "restoreState": 6,
               "isEOF": 1,
               "projections": {
                 "19": "doubleDoubleSumFinalize(s13) ",
@@ -114,11 +114,11 @@
                 "stage": "group",
                 "planNodeId": 4,
                 "nReturned": 5,
-                "executionTimeMillisEstimate": 173,
+                "executionTimeMillisEstimate": 104,
                 "opens": 1,
                 "closes": 1,
-                "saveState": 11,
-                "restoreState": 10,
+                "saveState": 7,
+                "restoreState": 6,
                 "isEOF": 1,
                 "groupBySlots": [
                   18
@@ -151,11 +151,11 @@
                   "stage": "project",
                   "planNodeId": 4,
                   "nReturned": 69843,
-                  "executionTimeMillisEstimate": 173,
+                  "executionTimeMillisEstimate": 80,
                   "opens": 1,
                   "closes": 1,
-                  "saveState": 11,
-                  "restoreState": 10,
+                  "saveState": 7,
+                  "restoreState": 6,
                   "isEOF": 1,
                   "projections": {
                     "18": "(s9 ?: null) "
@@ -164,22 +164,22 @@
                     "stage": "fetch",
                     "planNodeId": 2,
                     "nReturned": 69843,
-                    "executionTimeMillisEstimate": 154,
+                    "executionTimeMillisEstimate": 80,
                     "opens": 1,
                     "closes": 1,
-                    "saveState": 11,
-                    "restoreState": 10,
+                    "saveState": 7,
+                    "restoreState": 6,
                     "isEOF": 1,
                     "numReads": 69843,
                     "inputStage": {
                       "stage": "ixseek",
                       "planNodeId": 1,
                       "nReturned": 69843,
-                      "executionTimeMillisEstimate": 19,
+                      "executionTimeMillisEstimate": 6,
                       "opens": 1,
                       "closes": 1,
-                      "saveState": 11,
-                      "restoreState": 10,
+                      "saveState": 7,
+                      "restoreState": 6,
                       "isEOF": 1,
                       "indexName": "idx_classe_ts",
                       "keysExamined": 69843,
@@ -202,7 +202,7 @@
         }
       },
       "nReturned": 5,
-      "executionTimeMillisEstimate": 174
+      "executionTimeMillisEstimate": 104
     },
     {
       "$sort": {
@@ -218,7 +218,7 @@
       "spilledRecords": 0,
       "spilledDataStorageSize": 0,
       "nReturned": 3,
-      "executionTimeMillisEstimate": 174,
+      "executionTimeMillisEstimate": 104,
       "peakTrackedMemBytes": 1119
     },
     {
@@ -231,7 +231,7 @@
         "_id": false
       },
       "nReturned": 3,
-      "executionTimeMillisEstimate": 174
+      "executionTimeMillisEstimate": 104
     }
   ],
   "queryShapeHash": "D9275444C8C7A2E6A67FD2D4D5F143F0A1BC50D33333A09FF51C883002721D07",

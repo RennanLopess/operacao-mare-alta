@@ -69,14 +69,14 @@
         "executionStats": {
           "executionSuccess": true,
           "nReturned": 5,
-          "executionTimeMillis": 136,
+          "executionTimeMillis": 129,
           "totalKeysExamined": 100016,
           "totalDocsExamined": 100016,
           "executionStages": {
             "stage": "project",
             "planNodeId": 4,
             "nReturned": 5,
-            "executionTimeMillisEstimate": 136,
+            "executionTimeMillisEstimate": 121,
             "opens": 1,
             "closes": 1,
             "saveState": 9,
@@ -89,7 +89,7 @@
               "stage": "project",
               "planNodeId": 4,
               "nReturned": 5,
-              "executionTimeMillisEstimate": 136,
+              "executionTimeMillisEstimate": 121,
               "opens": 1,
               "closes": 1,
               "saveState": 9,
@@ -102,7 +102,7 @@
                 "stage": "group",
                 "planNodeId": 4,
                 "nReturned": 5,
-                "executionTimeMillisEstimate": 136,
+                "executionTimeMillisEstimate": 121,
                 "opens": 1,
                 "closes": 1,
                 "saveState": 9,
@@ -133,7 +133,7 @@
                   "stage": "project",
                   "planNodeId": 4,
                   "nReturned": 100016,
-                  "executionTimeMillisEstimate": 116,
+                  "executionTimeMillisEstimate": 111,
                   "opens": 1,
                   "closes": 1,
                   "saveState": 9,
@@ -146,7 +146,7 @@
                     "stage": "fetch",
                     "planNodeId": 2,
                     "nReturned": 100016,
-                    "executionTimeMillisEstimate": 116,
+                    "executionTimeMillisEstimate": 101,
                     "opens": 1,
                     "closes": 1,
                     "saveState": 9,
@@ -184,7 +184,7 @@
         }
       },
       "nReturned": 5,
-      "executionTimeMillisEstimate": 136
+      "executionTimeMillisEstimate": 122
     },
     {
       "$sort": {
@@ -200,7 +200,7 @@
       "spilledRecords": 0,
       "spilledDataStorageSize": 0,
       "nReturned": 3,
-      "executionTimeMillisEstimate": 136,
+      "executionTimeMillisEstimate": 122,
       "peakTrackedMemBytes": 1119
     },
     {
@@ -211,7 +211,7 @@
         "_id": false
       },
       "nReturned": 3,
-      "executionTimeMillisEstimate": 136
+      "executionTimeMillisEstimate": 122
     }
   ],
   "queryShapeHash": "E4D740265FF80656B0D7619840C5935FBDB78E898B1399AD371D3DBB597F5379",

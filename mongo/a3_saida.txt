@@ -1,9 +1,9 @@
-﻿=== 1) tipo real do campo registrado_em ===
+﻿=== 1) $type registrado_em ===
 {"_id":"string","qtd":100000,"exemplo":"2026-06-04T16:33:04.971Z"}
-docs com registrado_em do tipo date: 0
-docs com registrado_em do tipo string: 100000
+$type date: 0
+$type string: 100000
 
-=== 2) índice TTL (o gerador não cria, então crio o do cenário) ===
+=== 2) getIndexes ===
 [
   {
     v: 2,
@@ -22,10 +22,10 @@ docs com registrado_em do tipo string: 100000
   }
 ]
 
-=== 3) prova: um doc de controle com Date e outro com string, as duas datas de 60 dias atrás ===
-antes: total=100002 ttl.passes=23 ttl.deletedDocuments=0
-depois de 35 s: total=100001 ttl.passes=24 ttl.deletedDocuments=1
-docs de controle que sobraram:
-  {"registrado_em":"2026-09-24T22:54:43.510Z","obs":"controle string"}  tipo=string
+=== 3) controle Date x string (agora - 60 dias) ===
+antes: total=100002 ttl.passes=53 ttl.deletedDocuments=17
+depois (90 s): total=100001 ttl.passes=55 ttl.deletedDocuments=21
+find sensor TESTE_A3:
+  {"registrado_em":"2026-09-24T23:24:50.664Z","obs":"controle string"}  tipo=string
 
-total final (sem os controles): 100000
+countDocuments final: 100000

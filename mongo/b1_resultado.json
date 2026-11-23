@@ -8,11 +8,11 @@
       "totalKeysExamined": 0,
       "totalDocsExamined": 400000,
       "docsQueEntraramNoGroup": 69843,
-      "executionTimeMillis": 145,
+      "executionTimeMillis": 127,
       "tempos3execucoes": [
-        136,
         131,
-        132
+        122,
+        140
       ]
     },
     {
@@ -23,11 +23,11 @@
       "totalKeysExamined": 69843,
       "totalDocsExamined": 69843,
       "docsQueEntraramNoGroup": 69843,
-      "executionTimeMillis": 176,
+      "executionTimeMillis": 105,
       "tempos3execucoes": [
-        159,
-        106,
-        97
+        104,
+        100,
+        102
       ]
     }
   ],

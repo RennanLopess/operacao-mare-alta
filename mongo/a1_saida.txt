@@ -1,5 +1,5 @@
-﻿versao do mongod: 8.3.8
-top3 (c): [30997,30995,30993]
+﻿mongod: 8.3.8
+top3 peso_kg: [30997,30995,30993]
 [
   {
     cenario: 'a_sem_indice',
@@ -9,7 +9,7 @@ top3 (c): [30997,30995,30993]
     totalDocsExamined: 400000,
     totalKeysExamined: 0,
     nReturned: 20,
-    executionTimeMillis: 170
+    executionTimeMillis: 181
   },
   {
     cenario: 'b_ordem_filtro',
@@ -19,7 +19,7 @@ top3 (c): [30997,30995,30993]
     totalDocsExamined: 20,
     totalKeysExamined: 13953,
     nReturned: 20,
-    executionTimeMillis: 19
+    executionTimeMillis: 18
   },
   {
     cenario: 'c_esr',

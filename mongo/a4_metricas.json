@@ -6,7 +6,7 @@
     "totalKeysExamined": 15992,
     "totalDocsExamined": 0,
     "nReturned": 15992,
-    "executionTimeMillis": 20
+    "executionTimeMillis": 13
   },
   {
     "cenario": "2_sem_id0",
@@ -15,6 +15,6 @@
     "totalKeysExamined": 15992,
     "totalDocsExamined": 15992,
     "nReturned": 15992,
-    "executionTimeMillis": 30
+    "executionTimeMillis": 27
   }
 ]
