@@ -1,0 +1,61 @@
+{
+  "metricas": [
+    {
+      "cenario": "a_original",
+      "planoLeitura": "GROUP > COLLSCAN",
+      "indice": "-",
+      "estagiosForaDoCursor": "$limit(nReturned=3) > $match(nReturned=1) > $sort(nReturned=1)",
+      "totalKeysExamined": 0,
+      "totalDocsExamined": 400000,
+      "executionTimeMillis": 113
+    },
+    {
+      "cenario": "c_corrigido",
+      "planoLeitura": "GROUP > FETCH > IXSCAN",
+      "indice": "idx_classe_ts",
+      "estagiosForaDoCursor": "$sort(nReturned=3) > $project(nReturned=3)",
+      "totalKeysExamined": 100016,
+      "totalDocsExamined": 100016,
+      "executionTimeMillis": 136
+    }
+  ],
+  "corrigido": [
+    {
+      "kg_total": 322311912,
+      "mov": 20091,
+      "terminal": "T2"
+    },
+    {
+      "kg_total": 322205360,
+      "mov": 20047,
+      "terminal": "T1"
+    },
+    {
+      "kg_total": 320367289,
+      "mov": 19959,
+      "terminal": "T3"
+    }
+  ],
+  "manual": {
+    "T5": {
+      "kg": 318285468,
+      "mov": 19909
+    },
+    "T1": {
+      "kg": 322205360,
+      "mov": 20047
+    },
+    "T3": {
+      "kg": 320367289,
+      "mov": 19959
+    },
+    "T4": {
+      "kg": 319591169,
+      "mov": 20010
+    },
+    "T2": {
+      "kg": 322311912,
+      "mov": 20091
+    }
+  }
+}

@@ -1,0 +1,60 @@
+﻿=== a) original: 3 execuções seguidas ===
+execução 1: []
+execução 2: []
+execução 3: [{"_id":{"terminal":"T5","classe":"Refrigerado"},"kg_total":0,"mov":19909},{"_id":{"terminal":"T1","classe":"Refrigerado"},"kg_total":0,"mov":20047}]
+
+o que o $limit 3 pegou (pipeline até o $sort, sem o $match):
+  {"_id":{"terminal":"T2","classe":"Geral"},"kg_total":0,"mov":20278}
+  {"_id":{"terminal":"T4","classe":"Perigoso"},"kg_total":0,"mov":20176}
+  {"_id":{"terminal":"T2","classe":"Granel"},"kg_total":0,"mov":19790}
+arvore de execucao (dentro do $cursor):
+project nReturned=20
+  project nReturned=20
+    group nReturned=20
+      scan nReturned=400000
+{
+  cenario: 'a_original',
+  planoLeitura: 'GROUP > COLLSCAN',
+  indice: '-',
+  estagiosForaDoCursor: '$limit(nReturned=3) > $match(nReturned=1) > $sort(nReturned=1)',
+  totalKeysExamined: 0,
+  totalDocsExamined: 400000,
+  executionTimeMillis: 113
+}
+
+=== b) provas dos defeitos ===
+$sum de string literal "peso_kg" (sem $), todos os grupos:
+  {"_id":null,"com_literal":0,"com_cifrao":{"high":1,"low":2099818022,"unsigned":false}}
+depois do $project {terminal,classe}, o peso_kg some (mesmo usando $peso_kg):
+  {"_id":null,"kg":0}
+quantos grupos o $group original gera (o $limit 3 corta isso): 20
+
+=== c) corrigido ===
+  {"kg_total":322311912,"mov":20091,"terminal":"T2"}
+  {"kg_total":322205360,"mov":20047,"terminal":"T1"}
+  {"kg_total":320367289,"mov":19959,"terminal":"T3"}
+arvore de execucao (dentro do $cursor):
+project nReturned=5
+  project nReturned=5
+    group nReturned=5
+      project nReturned=100016
+        fetch nReturned=100016
+          ixseek nReturned=100016
+{
+  cenario: 'c_corrigido',
+  planoLeitura: 'GROUP > FETCH > IXSCAN',
+  indice: 'idx_classe_ts',
+  estagiosForaDoCursor: '$sort(nReturned=3) > $project(nReturned=3)',
+  totalKeysExamined: 100016,
+  totalDocsExamined: 100016,
+  executionTimeMillis: 136
+}
+
+conferência sem aggregate (find + soma no shell), todos os terminais:
+  T2 kg=322311912 mov=20091
+  T1 kg=322205360 mov=20047
+  T3 kg=320367289 mov=19959
+  T4 kg=319591169 mov=20010
+  T5 kg=318285468 mov=19909
+
+indices: ["_id_","idx_esr","idx_posicao_2dsphere","idx_tipo_terminal_container","idx_classe_ts"]
