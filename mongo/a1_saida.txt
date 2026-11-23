@@ -1,0 +1,35 @@
+﻿versao do mongod: 8.3.8
+top3 (c): [30997,30995,30993]
+[
+  {
+    cenario: 'a_sem_indice',
+    stages: 'SORT > COLLSCAN',
+    sortEmMemoria: true,
+    indice: '-',
+    totalDocsExamined: 400000,
+    totalKeysExamined: 0,
+    nReturned: 20,
+    executionTimeMillis: 170
+  },
+  {
+    cenario: 'b_ordem_filtro',
+    stages: 'FETCH > SORT > IXSCAN',
+    sortEmMemoria: true,
+    indice: 'idx_ordem_filtro',
+    totalDocsExamined: 20,
+    totalKeysExamined: 13953,
+    nReturned: 20,
+    executionTimeMillis: 19
+  },
+  {
+    cenario: 'c_esr',
+    stages: 'LIMIT > FETCH > IXSCAN',
+    sortEmMemoria: false,
+    indice: 'idx_esr',
+    totalDocsExamined: 20,
+    totalKeysExamined: 27,
+    nReturned: 20,
+    executionTimeMillis: 2
+  }
+]
+indices: [{"_id":1},{"terminal":1,"classe":1,"peso_kg":-1,"ts":1}]

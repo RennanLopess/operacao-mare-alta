@@ -1,0 +1,32 @@
+[
+  {
+    "cenario": "a_sem_indice",
+    "stages": "SORT > COLLSCAN",
+    "sortEmMemoria": true,
+    "indice": "-",
+    "totalDocsExamined": 400000,
+    "totalKeysExamined": 0,
+    "nReturned": 20,
+    "executionTimeMillis": 170
+  },
+  {
+    "cenario": "b_ordem_filtro",
+    "stages": "FETCH > SORT > IXSCAN",
+    "sortEmMemoria": true,
+    "indice": "idx_ordem_filtro",
+    "totalDocsExamined": 20,
+    "totalKeysExamined": 13953,
+    "nReturned": 20,
+    "executionTimeMillis": 19
+  },
+  {
+    "cenario": "c_esr",
+    "stages": "LIMIT > FETCH > IXSCAN",
+    "sortEmMemoria": false,
+    "indice": "idx_esr",
+    "totalDocsExamined": 20,
+    "totalKeysExamined": 27,
+    "nReturned": 20,
+    "executionTimeMillis": 2
+  }
+]

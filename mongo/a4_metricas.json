@@ -1,0 +1,20 @@
+[
+  {
+    "cenario": "1_coberta",
+    "stages": "PROJECTION_COVERED > IXSCAN",
+    "indice": "idx_tipo_terminal_container",
+    "totalKeysExamined": 15992,
+    "totalDocsExamined": 0,
+    "nReturned": 15992,
+    "executionTimeMillis": 20
+  },
+  {
+    "cenario": "2_sem_id0",
+    "stages": "PROJECTION_SIMPLE > FETCH > IXSCAN",
+    "indice": "idx_tipo_terminal_container",
+    "totalKeysExamined": 15992,
+    "totalDocsExamined": 15992,
+    "nReturned": 15992,
+    "executionTimeMillis": 30
+  }
+]

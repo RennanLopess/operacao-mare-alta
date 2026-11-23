@@ -1,0 +1,36 @@
+﻿=== 1) ANTES do índice 2dsphere ===
+índices: [{"_id":1},{"terminal":1,"classe":1,"peso_kg":-1,"ts":1}]
+ERRO code 291 (NoQueryExecutionPlans): unable to find index for $geoNear query
+$geoWithin sem índice: stages=COLLSCAN docsExamined=400000 nReturned=3729 ms=846
+
+=== 2) criando o índice ===
+idx_posicao_2dsphere
+
+=== 3) DEPOIS: $near + limit 10 com explain ===
+stages: LIMIT > GEO_NEAR_2DSPHERE > FETCH > IXSCAN
+{
+  totalDocsExamined: 14,
+  totalKeysExamined: 37,
+  nReturned: 10,
+  executionTimeMillis: 9
+}
+LIMIT | works=53 advanced=10
+  GEO_NEAR_2DSPHERE searchIntervals=1 | works=52 advanced=10
+    FETCH | works=38 advanced=14 docsExamined=14
+      IXSCAN idx=idx_posicao_2dsphere | works=38 advanced=14 keysExamined=37
+  anel 1: 0.0 m a 13.3 m, 14 docs bufferizados, 10 devolvidos
+
+=== 4) resultado (distância calculada com $geoNear, só pra conferência) ===
+{"container":"CTN13111","tipo":"carga","terminal":"T2","coords":[-48.50296744406689,-25.498005695431495],"dist_m":3.3}
+{"container":"CTN29305","tipo":"descarga","terminal":"T4","coords":[-48.50301766768564,-25.498030085267963],"dist_m":3.8}
+{"container":"CTN02566","tipo":"gate_out","terminal":"T1","coords":[-48.50296817496885,-25.497960983600933],"dist_m":5.4}
+{"container":"CTN54886","tipo":"gate_in","terminal":"T4","coords":[-48.50307270512451,-25.49803350130096],"dist_m":8.2}
+{"container":"CTN04839","tipo":"inspecao","terminal":"T2","coords":[-48.503050393871966,-25.497939200524705],"dist_m":8.5}
+{"container":"CTN35052","tipo":"gate_in","terminal":"T5","coords":[-48.50307858394692,-25.49796150031034],"dist_m":9}
+{"container":"CTN31050","tipo":"descarga","terminal":"T1","coords":[-48.50291413751431,-25.49803052583011],"dist_m":9.3}
+{"container":"CTN29227","tipo":"gate_in","terminal":"T1","coords":[-48.503074459992355,-25.498073449626098],"dist_m":11.1}
+{"container":"CTN16484","tipo":"gate_in","terminal":"T2","coords":[-48.50295001682127,-25.497907109674998],"dist_m":11.5}
+{"container":"CTN40312","tipo":"gate_out","terminal":"T4","coords":[-48.50296806132421,-25.497892812930512],"dist_m":12.4}
+total de docs dentro de 300 m: 3729
+
+índices: [{"_id":1},{"terminal":1,"classe":1,"peso_kg":-1,"ts":1},{"posicao":"2dsphere"}]

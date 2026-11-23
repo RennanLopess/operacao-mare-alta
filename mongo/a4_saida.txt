@@ -1,0 +1,23 @@
+﻿=== 1) com _id:0 (coberta) ===
+{
+  cenario: '1_coberta',
+  stages: 'PROJECTION_COVERED > IXSCAN',
+  indice: 'idx_tipo_terminal_container',
+  totalKeysExamined: 15992,
+  totalDocsExamined: 0,
+  nReturned: 15992,
+  executionTimeMillis: 20
+}
+amostra: [{"container":"CTN00003"},{"container":"CTN00003"},{"container":"CTN00009"}]
+
+=== 2) sem _id:0 ===
+{
+  cenario: '2_sem_id0',
+  stages: 'PROJECTION_SIMPLE > FETCH > IXSCAN',
+  indice: 'idx_tipo_terminal_container',
+  totalKeysExamined: 15992,
+  totalDocsExamined: 15992,
+  nReturned: 15992,
+  executionTimeMillis: 30
+}
+amostra: [{"_id":"6b04bfbfd8d2233129ccc9e9","container":"CTN00003"},{"_id":"6b04bfc4d8d2233129ced1f9","container":"CTN00003"},{"_id":"6b04bfbed8d2233129cc668b","container":"CTN00009"}]
