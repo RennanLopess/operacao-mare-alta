@@ -1,0 +1,8 @@
+﻿linhas_consulta_original
+0
+nos_com_id_literal
+0
+linhas_com_K28_direcao_original
+0
+exit_code: 0
+tempo_total_s: 1.6

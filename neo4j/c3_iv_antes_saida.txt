@@ -1,0 +1,13 @@
+﻿t.nome, count(k)
+"T1", 11
+"T3", 9
+"T4", 13
+"T5", 6
+"T2", 17
+container, terminal, passagens
+"K1", "T1", 2
+"K61", "T2", 2
+"K89", "T2", 2
+"K86", "T5", 2
+exit_code: 0
+tempo_total_s: 1.66

@@ -30,3 +30,19 @@ Saída original do gerador: [mongo/saida_gerador.txt](mongo/saida_gerador.txt). 
 - `diario.md`: o que deu errado, hipóteses que falharam e correções
 - `mongo/`: scripts, saídas e JSONs de explain (Partes A e B)
 - `neo4j/`: cypher, evidências e `diagrama.md` (Parte C)
+
+## Respostas
+
+| Questão | Arquivo |
+|---|---|
+| A1: índice composto e ESR | [mongo/A1.md](mongo/A1.md) |
+| A2: geoespacial 2dsphere | [mongo/A2.md](mongo/A2.md) |
+| A3: TTL com string | [mongo/A3.md](mongo/A3.md) |
+| A4: covered query | [mongo/A4.md](mongo/A4.md) |
+| B1: agregação por terminal | [mongo/B1.md](mongo/B1.md) |
+| B2: debug de pipeline | [mongo/B2.md](mongo/B2.md) |
+| C1: diagrama Mermaid | [neo4j/diagrama.md](neo4j/diagrama.md) |
+| C2: rede da sancionada | [neo4j/C2.md](neo4j/C2.md) |
+| C3: debug Cypher | [neo4j/C3.md](neo4j/C3.md) |
+
+Índices finais em `movimentacoes`: `_id_`, `idx_esr` (A1), `idx_posicao_2dsphere` (A2), `idx_tipo_terminal_container` (A4) e `idx_classe_ts` (B1/B2). Ver [mongo/indices_fim_parte_B.txt](mongo/indices_fim_parte_B.txt).

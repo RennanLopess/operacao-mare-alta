@@ -1,0 +1,16 @@
+﻿duplicados_apagados
+2
+cnpj, nos
+"E1", 1
+"E2", 1
+de, pct, para
+"Empresa 1", 30, "Empresa 2"
+de, pct, para
+"Empresa 1", 30, "Empresa 2"
+cnpj, nos
+"E1", 1
+"E2", 1
+arestas_E1_E2
+1
+total_empresas
+30

@@ -1,0 +1,15 @@
+﻿empresa
+"Empresa 14"
+"Empresa 2"
+"Empresa 20"
+"Empresa 21"
+"Empresa 23"
+"Empresa 24"
+"Empresa 25"
+"Empresa 28"
+"Empresa 3"
+"Empresa 4"
+"Empresa 7"
+caminhos_percorridos
+13
+tempo_total_s: 1.71

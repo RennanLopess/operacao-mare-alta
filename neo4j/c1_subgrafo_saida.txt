@@ -1,0 +1,16 @@
+﻿cnpj, nome, sancionada
+"E22", "Empresa 22", TRUE
+de, pct, para
+"E22", 59, "E2"
+"E22", 72, "E7"
+container, classe, terminal, data
+"K0", "Granel", "T2", "2026-10-21"
+"K0", "Granel", "T5", "2026-10-22"
+"K1", "Perigoso", "T1", "2026-10-09"
+"K1", "Perigoso", "T1", "2026-10-11"
+"K2", "Granel", "T4", "2026-10-10"
+"K2", "Granel", "T4", "2026-10-21"
+"K49", "Granel", "T2", "2026-10-16"
+"K49", "Granel", "T4", "2026-10-30"
+base, apontam_para_k28, k28_aponta_para
+"K28", ["K29"], []

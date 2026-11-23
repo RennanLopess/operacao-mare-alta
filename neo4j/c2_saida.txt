@@ -1,0 +1,28 @@
+﻿empresa, nivel, pcts
+"E2", 1, [59]
+"E7", 1, [72]
+"E20", 2, [59, 66]
+"E21", 2, [72, 28]
+"E23", 2, [72, 74]
+"E28", 2, [59, 55]
+"E3", 2, [59, 73]
+"E14", 3, [59, 55, 79]
+"E20", 3, [72, 74, 44]
+"E21", 3, [72, 74, 42]
+"E24", 3, [59, 73, 43]
+"E25", 3, [59, 55, 60]
+"E4", 3, [72, 74, 46]
+saida, entrada, sem_direcao
+11, 0, 16
+linhas_sem_distinct
+5
+empresa_investigada, container, terminal, data
+"Empresa 20", "K69", "T2", "2026-10-21"
+"Empresa 24", "K28", "T2", "2026-10-16"
+"Empresa 24", "K36", "T2", "2026-10-16"
+"Empresa 28", "K18", "T1", "2026-10-09"
+empresa_investigada, container, terminal, data, container_sancionada
+"Empresa 20", "K69", "T2", "2026-10-21", "K0"
+"Empresa 24", "K28", "T2", "2026-10-16", "K49"
+"Empresa 24", "K36", "T2", "2026-10-16", "K49"
+"Empresa 28", "K18", "T1", "2026-10-09", "K1"

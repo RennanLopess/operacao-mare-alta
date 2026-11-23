@@ -1,0 +1,23 @@
+﻿x.nome
+"Empresa 2"
+"Empresa 28"
+"Empresa 14"
+"Empresa 12"
+"Empresa 29"
+"Empresa 1"
+"Empresa 12"
+"Empresa 18"
+"Empresa 13"
+"Empresa 24"
+"Empresa 3"
+"Empresa 27"
+"Empresa 15"
+"Empresa 9"
+"Empresa 0"
+"Empresa 6"
+"Empresa 16"
+"Empresa 26"
+"Empresa 29"
+"Empresa 18"
+exit_code: 0
+tempo_total_s: 1.57

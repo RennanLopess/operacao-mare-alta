@@ -1,0 +1,10 @@
+﻿cnpj, nos, nomes
+"E1", 1, ["Empresa 1"]
+"E2", 1, ["Empresa 2"]
+arestas_E1_E2
+0
+cnpj, nos, nomes
+"E1", 2, ["Empresa 1"]
+"E2", 2, ["Empresa 2"]
+total_empresas
+32

@@ -1,0 +1,10 @@
+﻿tamanho_caminho, caminhos, empresas_distintas
+1, 2, 2
+2, 7, 7
+3, 19, 12
+4, 59, 25
+5, 142, 28
+6, 338, 29
+7, 801, 29
+8, 1770, 29
+tempo_total_s: 1.78

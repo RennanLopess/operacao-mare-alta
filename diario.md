@@ -52,3 +52,31 @@
 - O total dos Refrigerados do T2 deu 20.091, igual ao código de autenticidade. Usei isso como prova extra, além da soma feita no shell sem aggregate.
 - O `$sum` com `$peso_kg` no shell apareceu como `{high:1, low:...}`, que é um Long passando de 2³². Convertendo, dá 6.394.785.318.
 - Fechamento da Parte B: `getIndexes()` com 5 índices, todos usados. Não precisei criar índice na B2.
+
+## Limpeza dos scripts e nova execução
+
+- Tirei os comentários dos scripts e deixei as saídas só com rótulos e resultados. Pra não ficar saída que não veio do script atual, rodei tudo de novo, de A1 a B2, na mesma ordem.
+- Todas as contagens se repetiram (docs, chaves, resultados). Até as 3 execuções do pipeline errado da B2 deram de novo `[]`, `[]` e 2 linhas. Só os tempos mudaram um pouco, e atualizei os `.md`.
+- Na A3, aproveitei e corrigi o loop de espera (converti o `passes` com `Number()`), e agora ele espera as 2 passadas certinho. Apareceu uma coisa nova: o `ttl.deletedDocuments` subiu 4, e não 1. Fui ver e esse contador é do servidor inteiro, porque o TTL também apaga sessões expiradas do `config.system.sessions`. Então a prova certa é o total de `alertas` (100.002 → 100.001) e o controle Date sumindo, e não o contador. Na primeira rodada o +1 bateu por coincidência.
+- O B1 com índice ficou mais estável agora (~100 ms nas 3), contra ~130 do COLLSCAN.
+
+## C1
+
+- Consultei o subgrafo da E22 antes de desenhar. Ela é sócia da E2 (59%) e da E7 (72%) e **ninguém é sócio dela**. Além dos 3 containers que o gerador força (K0, K1, K2), ela tem o K49.
+- Usei `flowchart` do Mermaid em vez de `erDiagram` porque o ER puxa pra cara de tabela com FK, e o enunciado pede justamente pra não fazer isso.
+
+## C2
+
+- **Errei a quantidade de empresas:** previ 4 a 7 e foram **11**. Calculei a média de 1,5 saídas por empresa, mas no caminho da E22 calhou de ter empresas com mais saídas (a E2 e a E7 levam pra 5 empresas no nível 2).
+- O número de linhas ficou dentro da previsão: deram **4** (eu tinha chutado ~3, entre 0 e 5).
+- A direção que escolhi (`->` a partir da E22) acabou sendo a única que faz sentido no meu grafo, porque pela entrada não vem ninguém (0 empresas).
+- O DISTINCT fez diferença de verdade: 5 linhas sem ele e 4 com ele. A E20 aparece por dois caminhos.
+- Coincidência curiosa: o K28, que é a minha BASE_DA_PILHA, é da Empresa 24 e aparece na C2, passando pelo T2 no mesmo dia que o K49 da sancionada.
+
+## C3
+
+- (i) Antes de rodar a correção, apaguei os duplicados pelo critério `nome IS NULL`, porque o CREATE errado só põe o `cnpj` e as empresas originais têm todas `nome`. Conferi que voltou pra 30 empresas. Além do MERGE, criei uma constraint de unicidade, e o CREATE errado passou a dar erro. Deixei a aresta E1→E2 (pct 30), que é o resultado da versão corrigida.
+- Esse MERGE mudou o grafo, então rodei a C2 de novo pra conferir. O resultado é o mesmo (4 linhas, 11 empresas), porque a aresta nova sai da E1, e a E1 não está na rede de saída da E22. Só a contagem **sem direção** subiu de 16 pra 18.
+- (ii) Tentei limitar a transação em 30 s com `dbms.setConfigValue`, mas essa procedure não existe no Neo4j Community. Usei o `timeout 30` do Linux no `cypher-shell`. A consulta com `LIMIT 20` terminou em ~1,6 s e não precisou ser cortada. Pra mostrar a explosão sem travar o banco, contei os caminhos por tamanho, até 8: crescem ~2,3× por nível enquanto as empresas distintas param em 29.
+- (iii) Testei também só trocando o id pra K28 sem mudar a direção, e continua dando 0. Assim dá pra ver que os dois defeitos existem de verdade, e não só o do texto literal.
+- O `cypher-shell --format plain` não imprime nada quando a consulta volta vazia. Acrescentei um `count()` pra deixar o 0 visível na saída.
