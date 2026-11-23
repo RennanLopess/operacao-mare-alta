@@ -76,3 +76,15 @@ Raciocínio: Refrigerado é 1/4 de 400 mil ≈ 100 mil, e 70% depois do corte (d
 - Plano: **IXSCAN no `idx_classe_ts`** (prefixo `classe`, `ts` sem limite) → FETCH → group. ~100 mil chaves e ~100 mil docs (1/4 de 400 mil), **~100 mil entram no `$group`**, 5 grupos, 3 na saída.
 - Cada terminal com ~20 mil mov. e ~320 milhões de kg (20 mil × ~16 mil kg).
 - SORT só de 5 linhas.
+
+## C2 — empresas ligadas à sancionada (E22) até 3 níveis, com container no mesmo terminal e na mesma data
+
+Escrita **antes** de consultar o grafo (nem a C1 eu rodei ainda). Só sei o que o gerador faz.
+
+**Direção:** no gerador a aresta é `(a)-[:SOCIA_DE {pct}]->(b)`, ou seja, "a é sócia de b" (a tem pct% de b). Vou seguir **a partir da sancionada pra fora**: `(s)-[:SOCIA_DE*1..3]->(x)`. Isso pega as empresas em que a E22 tem participação, direta ou por meio de outras empresas. É por elas que uma empresa sancionada consegue continuar operando "por baixo dos panos" (laranjas, controladas). Quem é dono da E22 (direção contrária) é outra investigação. Pra comparar, vou contar também quantas aparecem sem direção.
+
+**Ordem de grandeza:**
+- 45 arestas entre 30 empresas dão ~1,5 saídas por empresa. Em 3 níveis seriam 1,5 + 2,25 + 3,4 ≈ 7, menos repetições: **~4 a 7 empresas alcançadas**.
+- Cada empresa tem ~3 containers (90/30). A E22 tem os 3 forçados (K0, K1, K2) + ~3 aleatórios ≈ **~6 containers, ~12 passagens**.
+- As investigadas teriam ~6 × 3 × 2 ≈ 36 passagens. A chance de duas passagens caírem no mesmo terminal e no mesmo dia é 1/5 × 1/30 = 1/150. Então 36 × 12 / 150 ≈ **~3 coincidências**.
+- Espero **poucas linhas, de 0 a 5 (chute: ~3)**. Pode até dar 0. O DISTINCT deve remover pouca coisa (só se a mesma empresa aparecer por dois caminhos diferentes).
