@@ -51,3 +51,13 @@ Raciocínio: 5 tipos × 5 terminais uniformes, então ~400.000 / 25 ≈ **16 mil
 | nReturned | ~16 mil | ~16 mil |
 
 Por quê: o `_id` sai na projeção por padrão e não está no índice. Se eu não excluir, o Mongo precisa ir em cada documento (FETCH) só pra pegar o `_id`, e a consulta deixa de ser coberta. O índice ESR da A1 começa por `terminal` mas não tem `tipo` nem `container`, então acho que o planner nem vai escolher ele.
+
+## B1 — agregação por terminal (Refrigerado, ts ≥ 2026-04-01)
+
+Raciocínio: Refrigerado é 1/4 de 400 mil ≈ 100 mil, e 70% depois do corte (dia 90 de 300) dá **~70 mil docs** no `$match`.
+
+- **Sem índice próprio:** o `idx_esr` começa por `terminal`, e o `$match` não filtra terminal, então ele não serve como prefixo. Com os índices de hoje, espero **COLLSCAN com 400 mil docs examinados**.
+- **Índice que vou criar:** `{ classe: 1, ts: 1 }` (igualdade e depois range).
+- **Com o índice:** `IXSCAN → FETCH` (o FETCH é necessário porque `terminal` e `peso_kg` não estão no índice) → `$group`. Estimo **totalKeysExamined ≈ totalDocsExamined ≈ 70 mil**, e são esses **~70 mil docs que entram no `$group`**.
+- **SORT em memória:** só o `$sort` depois do `$group`, que ordena 5 linhas (uma por terminal), então não pesa nada.
+- **Saída (nReturned final):** 3 linhas. Cada terminal tem ~14 mil movimentações, peso médio perto de 16 mil kg (média de 1.000 + 0 a 29.999), peso total na casa de ~220–230 milhões de kg e maior peso perto de 31 mil kg. Os três primeiros devem ficar bem próximos, porque os dados são uniformes.
